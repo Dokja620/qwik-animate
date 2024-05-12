@@ -6,29 +6,36 @@ export const Animate = component$(({ optionAttribute, class: classProp }: { opti
 
   const isInView = useStore({ inView: false });
 
-  useVisibleTask$(({ track }) => {
-    track(() => isInView.inView);
+  useVisibleTask$(({ track, cleanup }) => {
+  track(() => isInView.inView);
 
-    // Check if the component is in view and set the flag accordingly
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isInView.inView = entry.isIntersecting;
-      },
-      { threshold: 0.2 } // Adjust the threshold as needed
-    );
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        isInView.inView = true;
+        console.log('Component is in view:', optionAttribute);
+      } else {
+        isInView.inView = false;
+        console.log('Component is not in view:', optionAttribute);
+      }
+    },
+    { threshold: 0.5 } // Adjust the threshold as needed
+  );
 
-    const targetElement = document.querySelector(`div[option-attribute="${optionAttribute}"]`);
-    if (targetElement) {
-      observer.observe(targetElement);
-    }
+  const targetElement = document.querySelector(`div[option-attribute='${optionAttribute}']`);
+  if (targetElement) {
+    observer.observe(targetElement);
+  }
 
-    return () => {
-      observer.disconnect();
-    };
-  });
+  cleanup(() => observer.disconnect());
+});
 
   return (
-    <div class={classProp} option-attribute={optionAttribute} {...(isInView.inView ? { 'qwik-animate': `${optionAttribute}` } : {})}>
+    <div
+      class={classProp}
+      option-attribute={optionAttribute}
+      qwik-animate={isInView.inView ? optionAttribute : undefined}
+    >
       <Slot />
     </div>
   );

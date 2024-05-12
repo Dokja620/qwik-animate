@@ -5,6 +5,7 @@ import { Animate } from "~/components/qwik-animate/animate";
 export default component$(() => {
   return (
     <>
+      <section></section>
       <section>
         <Animate class="div" optionAttribute="@sc-in_child-ascend @bn @rt-z">
           <h1>Hi 👋</h1>
@@ -29,6 +30,7 @@ export default component$(() => {
           </div>
         </Animate>
       </section>
+      <section></section>
       <section>
         <Animate class="div" optionAttribute="@sc-in_child-ascend @bn @rt-z">
           <h1>Hi 👋</h1>
