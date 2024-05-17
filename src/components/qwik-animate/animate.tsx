@@ -3,12 +3,13 @@ import animateStyles from './animate.css?inline';
 
 interface Store {
   isIntersecting: boolean;
+  hasAnimated: boolean; // Track if the animation has run at least once
 }
 
-export const Animate = component$(({ animationOptions, class: classProp }: { animationOptions: string, class?: string }) => {
+export const Animate = component$(({ animationOptions, class: classProp, runOnce = false }: { animationOptions: string, class?: string, runOnce?: boolean }) => {
   useStyles$(animateStyles);
 
-  const store = useStore<Store>({ isIntersecting: false });
+  const store = useStore<Store>({ isIntersecting: false, hasAnimated: false });
   const elementId = Math.random().toString(36).substr(2, 9);
 
   useVisibleTask$(({ track, cleanup }) => {
@@ -22,11 +23,15 @@ export const Animate = component$(({ animationOptions, class: classProp }: { ani
               store.isIntersecting = entry.isIntersecting;
               // Testing purpose
               console.log(`Component with ${animationOptions} is in view:`, entry.isIntersecting);
+
+              if (entry.isIntersecting) {
+                store.hasAnimated = true;
+              }
             }
           }
         });
       },
-      { threshold: 0.5 } // Adjust the threshold as needed
+      { threshold: 0.5 }
     );
 
     const targetElement = document.querySelector(`[qwik-animate-id='${elementId}']`);
@@ -42,7 +47,7 @@ export const Animate = component$(({ animationOptions, class: classProp }: { ani
       qwik-animate-id={elementId}
       class={classProp}
       animation-options={animationOptions}
-      qwik-animate={store.isIntersecting ? animationOptions : undefined}
+      qwik-animate={store.isIntersecting || (runOnce && store.hasAnimated) ? animationOptions : undefined}
     >
       <Slot />
     </div>
