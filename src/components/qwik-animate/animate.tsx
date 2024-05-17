@@ -4,35 +4,28 @@ import animateStyles from './animate.css?inline';
 export const Animate = component$(({ optionAttribute, class: classProp }: { optionAttribute: string, class?: string }) => {
   useStyles$(animateStyles);
 
-  const store = useStore<{ elements: Record<string, boolean> }>({ elements: {} });
+  const store = useStore<{ isIntersecting: boolean }>({ isIntersecting: false });
 
   useVisibleTask$(({ track, cleanup }) => {
-    track(() => store.elements);
+    track(() => store.isIntersecting);
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
-          const elementId = entry.target.getAttribute('option-attribute');
-          if (elementId) {
-            if (entry.isIntersecting) {
-              if (!store.elements[elementId]) {
-                store.elements[elementId] = true;
-                console.log('Component is in view:', elementId);
-              }
-            } else {
-              if (store.elements[elementId]) {
-                store.elements[elementId] = false;
-                console.log('Component is not in view:', elementId);
-              }
-            }
+          if (entry.target.getAttribute('option-attribute') === optionAttribute) {
+            store.isIntersecting = entry.isIntersecting;
+            // Testing purpose
+            console.log(`Component with ${optionAttribute} is in view:`, entry.isIntersecting);
           }
         });
       },
       { threshold: 0.5 } // Adjust the threshold as needed
     );
 
-    const targetElements = document.querySelectorAll(`div[option-attribute='${optionAttribute}']`);
-    targetElements.forEach(targetElement => observer.observe(targetElement));
+    const targetElement = document.querySelector(`div[option-attribute='${optionAttribute}']`);
+    if (targetElement) {
+      observer.observe(targetElement);
+    }
 
     cleanup(() => observer.disconnect());
   });
@@ -41,7 +34,7 @@ export const Animate = component$(({ optionAttribute, class: classProp }: { opti
     <div
       class={classProp}
       option-attribute={optionAttribute}
-      qwik-animate={store.elements[optionAttribute] ? optionAttribute : undefined}
+      qwik-animate={store.isIntersecting ? optionAttribute : undefined}
     >
       <Slot />
     </div>

@@ -1,4 +1,14 @@
 /*A.css - https://github.com/w4u-public/A.css */
+/* init */
+
+[option-attribute]{
+  opacity: 0;
+  transition: .5s opacity ease;
+}
+[qwik-animate]{
+  opacity: 1;
+}
+
 [qwik-animate*="@fd"],
 [qwik-animate*="@sl"],
 [qwik-animate*="@rt"],
