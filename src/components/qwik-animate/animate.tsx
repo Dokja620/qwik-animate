@@ -1,40 +1,49 @@
 import { component$, Slot, useStyles$, useStore, useVisibleTask$ } from '@builder.io/qwik';
 import animateStyles from './animate.css?inline';
 
-export const Animate = component$(({ optionAttribute, class: classProp }: { optionAttribute: string, class?: string }) => {
+export const Animate = component$(({ optionAttribute, animationRepeat = 'true', class: classProp }: { optionAttribute: string, animationRepeat?: string, class?: string }) => {
   useStyles$(animateStyles);
 
-  const isInView = useStore({ inView: false });
+  const store = useStore<{ elements: Record<string, boolean> }>({ elements: {} });
 
   useVisibleTask$(({ track, cleanup }) => {
-  track(() => isInView.inView);
+    track(() => store.elements);
 
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        isInView.inView = true;
-        console.log('Component is in view:', optionAttribute);
-      } else {
-        isInView.inView = false;
-        console.log('Component is not in view:', optionAttribute);
-      }
-    },
-    { threshold: 0.5 } // Adjust the threshold as needed
-  );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          const elementId = entry.target.getAttribute('option-attribute');
+          if (elementId) {
+            const shouldRepeat = entry.target.getAttribute('animation-repeat') === 'true';
+            if (entry.isIntersecting) {
+              if (!store.elements[elementId]) {
+                store.elements[elementId] = true;
+                console.log('Component is in view:', elementId);
+              }
+            } else {
+              if (store.elements[elementId] && shouldRepeat) {
+                store.elements[elementId] = false;
+                console.log('Component is not in view:', elementId);
+              }
+            }
+          }
+        });
+      },
+      { threshold: 0.5 } // Adjust the threshold as needed
+    );
 
-  const targetElement = document.querySelector(`div[option-attribute='${optionAttribute}']`);
-  if (targetElement) {
-    observer.observe(targetElement);
-  }
+    const targetElements = document.querySelectorAll(`div[option-attribute='${optionAttribute}']`);
+    targetElements.forEach(targetElement => observer.observe(targetElement));
 
-  cleanup(() => observer.disconnect());
-});
+    cleanup(() => observer.disconnect());
+  });
 
   return (
     <div
       class={classProp}
       option-attribute={optionAttribute}
-      qwik-animate={isInView.inView ? optionAttribute : undefined}
+      animation-repeat={animationRepeat}
+      qwik-animate={store.elements[optionAttribute] ? optionAttribute : undefined}
     >
       <Slot />
     </div>
