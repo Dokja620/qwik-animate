@@ -1,3 +1,5 @@
+![Logo](https://github.com/Dokja620/qwik-animate/blob/master/logo.webp)
+
 # Qwik Animate 🎨✨
 Introducing **QwikAnimate**: 🌟 An animated on-scroll library for QwikJS! With a vast array of animations, it seamlessly integrates with QwikJS, enabling effortless creation of captivating scroll-triggered effects. 💫
 
@@ -37,7 +39,7 @@ export default function MyComponent() {
 ### Run Once
 The `runOnce` prop ensures that the animation runs only once when the element first comes into view.
 
-```typescript
+```tsx
 <Animate class="div" animationOptions="@sc-in_child-ascend @bn @rt-z" runOnce>
   <!-- Your content here -->
 </Animate>
@@ -46,7 +48,7 @@ The `runOnce` prop ensures that the animation runs only once when the element fi
 ### Debug Mode
 The `debug` prop allows you to enable console logs for debugging purposes.
 
-```typescript
+```tsx
 <Animate class="div" animationOptions="@sc-in_child-ascend @bn @rt-y" debug>
   <!-- Your content here -->
 </Animate>
