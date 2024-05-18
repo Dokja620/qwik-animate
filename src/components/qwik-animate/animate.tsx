@@ -12,6 +12,7 @@ export const Animate = component$(({ animationOptions, class: classProp, runOnce
   const store = useStore<Store>({ isIntersecting: false, hasAnimated: false });
   const elementId = Math.random().toString(36).substr(2, 9);
 
+  // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(({ track, cleanup }) => {
     track(() => store.isIntersecting);
 
