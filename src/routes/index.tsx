@@ -6,7 +6,7 @@ export default component$(() => {
   return (
     <>
       <section>
-        <Animate class="div" animationOptions="@sc-in_child-ascend @bn @rt-z" runOnce debug>
+        <Animate class="div" animationOptions="@sc-in_child-ascend @bn @rt-z" runOnce>
           <h1>Hi 👋</h1>
           <div>
             Can't wait to see what you build with qwik!
