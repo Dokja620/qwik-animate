@@ -1,48 +1,24 @@
-
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
 # Qwik Animate 🎨✨
-Introducing QwikAnimate: 🌟 the ultimate Animated on Scroll library for QwikJS! With a vast array of animations, it seamlessly integrates with QwikJS, enabling effortless creation of captivating scroll-triggered effects. 💫
+Introducing **QwikAnimate**: 🌟 An animated on-scroll library for QwikJS! With a vast array of animations, it seamlessly integrates with QwikJS, enabling effortless creation of captivating scroll-triggered effects. 💫
 
-
-This component allows you to specify animation options, CSS classes, and whether the animation should run only once. It utilizes the `useVisibleTask$` hook to observe the visibility of the component in the viewport and triggers animations accordingly.
+## Features
+- **Run Once**: Ensure animations run only once when the element first comes into view.
+- **Debug Mode**: Enable console logs for debugging purposes.
+- **Animation Preset File**: Includes `animate.css` with a variety of predefined animations.
 
 ## Installation 👀
+Install QwikAnimate in your project using npm:
 
-Install my-project with npm
-
-```bash
-  cd my-project
-  
-  npm install @dokja620/qwik-animate
-
-```
-    ## Animation
-
-You can choose animations from our CSS animation library at `css.animation.qwik` or use your own custom animations by defining keyframes and other properties using the `qwik-animate` attribute.
-
-To use your own custom animation, follow these steps:
-
-1. Define the keyframes for your animation in CSS:
-
-```css
-[qwik-animate*="whatever"]{
-    animation: myCustomAnimation 1s ease-out forwards;
-    animation-delay: 0.5s;
-}
-@keyframes myCustomAnimation {
-  0% {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+```sh
+cd my-project
+npm install @dokja620/qwik-animate
 ```
 
-2. In your JSX, use the `Animate` component and specify the CSS class for the element. For the `animationOptions` prop, target the `qwik-animate` attribute in your CSS and provide the necessary animation properties:
+## Usage Example
+Here's a basic example to get you started with QwikAnimate:
+
+### Example Usage in a Page
+In the Qwik page where you want to use the `Animate` component, import it and use it as shown below:
 
 ```tsx
 import { Animate } from "~/components/qwik-animate/animate";
@@ -50,10 +26,7 @@ import { Animate } from "~/components/qwik-animate/animate";
 export default function MyComponent() {
   return (
     <>
-      <Animate
-        class="div"
-        animationOptions="whatever"
-      >
+      <Animate class="div" animationOptions="*whatever*">
         <!-- Your content here -->
       </Animate>
     </>
@@ -61,48 +34,32 @@ export default function MyComponent() {
 }
 ```
 
-In this example, the `div` element will be animated with the `myCustomAnimation` keyframes when it comes into view during scrolling. The animation will have a duration of 1 second, an ease-out timing function, and a delay of 0.5 seconds.
-## Usage 🙃
-### default
-The animation to run whenever the element comes into view:
+### Run Once
+The `runOnce` prop ensures that the animation runs only once when the element first comes into view.
 
-```tsx
-    import { Animate } from "~/components/qwik-animate/animate";
-
-    export default function MyComponent() {
-    return (
-        <>
-            <Animate class="div" animationOptions="@from-library">
-                <!-- Your content here -->
-            </Animate>
-        </>
-    );
-    }
-
+```typescript
+<Animate class="div" animationOptions="@sc-in_child-ascend @bn @rt-z" runOnce>
+  <!-- Your content here -->
+</Animate>
 ```
 
-### Using Animate with runOnce
-If you want the animation to run only once:
+### Debug Mode
+The `debug` prop allows you to enable console logs for debugging purposes.
 
-```tsx
-import { Animate } from "~/components/qwik-animate/animate";
-
-    export default function MyComponent() {
-    return (
-        <>
-            <Animate class="div" animationOptions="@from-library" runOnce>
-                <!-- Your content here -->
-            </Animate>
-        </>
-    );
-}
+```typescript
+<Animate class="div" animationOptions="@sc-in_child-ascend @bn @rt-y" debug>
+  <!-- Your content here -->
+</Animate>
 ```
 
-In both examples, you can use the Animate component multiple times within a single component to apply animations as needed.
-# Credits
+## Animation Preset File
+Qwik Animate comes with `animate.css`, an animation preset file that includes a variety of predefined animations. This file makes it easy to apply animations without having to define them manually.
+
+## Testing Animations
+To test the animations, you can use our animation playground at [qwikanimate.css](https://qwikanimate.css). The playground allows you to experiment with different animations and see how they will look in your application.
+
+## Credits
 👏 Credit is due to @w4u-public/A.css for creating an exceptionally comprehensive CSS animation generator. His remarkable work, crafted single-handedly, deserves wider recognition for its innovation and utility.
 
 ## License
-
 [MIT](https://choosealicense.com/licenses/mit/)
-
