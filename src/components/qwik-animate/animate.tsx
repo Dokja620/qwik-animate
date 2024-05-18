@@ -6,7 +6,7 @@ interface Store {
   hasAnimated: boolean; // Track if the animation has run at least once
 }
 
-export const Animate = component$(({ animationOptions, class: classProp, runOnce = false }: { animationOptions: string, class?: string, runOnce?: boolean }) => {
+export const Animate = component$(({ animationOptions, class: classProp, runOnce = false, debug = false }: { animationOptions: string, class?: string, runOnce?: boolean, debug?: boolean }) => {
   useStyles$(animateStyles);
 
   const store = useStore<Store>({ isIntersecting: false, hasAnimated: false });
@@ -21,8 +21,10 @@ export const Animate = component$(({ animationOptions, class: classProp, runOnce
           if (entry.target.getAttribute('qwik-animate-id') === elementId) {
             if (store.isIntersecting !== entry.isIntersecting) {
               store.isIntersecting = entry.isIntersecting;
-              // Testing purpose
-              console.log(`Component with ${animationOptions} is in view:`, entry.isIntersecting);
+
+              if (debug) {
+                console.log(`Animate component "${elementId}" is in view:`, entry.isIntersecting);
+              }
 
               if (entry.isIntersecting) {
                 store.hasAnimated = true;
