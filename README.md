@@ -1,6 +1,8 @@
-<div style="text-align:center">
-  <img src="https://github.com/Dokja620/qwik-animate/blob/master/logo.webp" alt="Logo" width="300">
-</div>
+<br>
+  <p align="center">
+    <img alt="Qwik Logo" width="250" src="https://github.com/Dokja620/qwik-animate/raw/master/logo.webp" />
+  </p>
+<br>
 
 # Qwik Animate 🎨✨
 Introducing **QwikAnimate**: 🌟 An animated on-scroll library for QwikJS! With a vast array of animations, it seamlessly integrates with QwikJS, enabling effortless creation of captivating scroll-triggered effects. 💫
