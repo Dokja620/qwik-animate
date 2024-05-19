@@ -1,8 +1,10 @@
 {
-  "name": "qwik-animate",
+  "name": "@dokja620/qwik-animate",
   "version": "1.0.0",
   "description": "An animated on-scroll library for QwikJS! With a vast array of animations, it seamlessly integrates with QwikJS, enabling effortless creation of captivating scroll-triggered effects.",
-  "main": "index.js",
+  "main": "./lib/index.qwik.mjs",
+  "qwik": "./lib/index.qwik.mjs",
+  "types": "./lib-types/index.d.ts",
   "keywords": [
     "qwik",
     "qwikjs",
@@ -22,17 +24,49 @@
     "debug-mode",
     "preset-animations"
   ],  
+  "exports": {
+    ".": {
+      "import": "./lib/index.qwik.mjs",
+      "require": "./lib/index.qwik.cjs",
+      "types": "./lib-types/index.d.ts"
+    }
+  },
+  "files": [
+    "lib",
+    "lib-types"
+  ],
+  "engines": {
+    "node": "^18.17.0 || ^20.3.0 || >=21.0.0"
+  },
+  "private": false,
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "qwik build",
+    "build.lib": "vite build --mode lib",
+    "build.types": "tsc --emitDeclarationOnly",
+    "dev": "vite --mode ssr",
+    "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
+    "fmt": "prettier --write .",
+    "fmt.check": "prettier --check .",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "release": "np",
+    "start": "vite --open --mode ssr",
+    "test": "echo \"No test specified\" && exit 0",
+    "qwik": "qwik"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Dokja620/qwik-animate.git"
-  },
-  "author": "RAKOTOARIVAO Diary Axel",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/Dokja620/qwik-animate/issues"
-  },
-  "homepage": "https://github.com/Dokja620/qwik-animate#readme"
+  "devDependencies": {
+    "@builder.io/qwik": "1.5.4",
+    "@types/eslint": "^8.56.10",
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-qwik": "latest",
+    "np": "^8.0.4",
+    "prettier": "^3.2.5",
+    "typescript": "5.4.5",
+    "undici": "*",
+    "vite": "^5.2.10",
+    "vite-tsconfig-paths": "^4.2.1"
+  }
 }

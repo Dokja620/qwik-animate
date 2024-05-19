@@ -1,7 +1,7 @@
 /*A.css - https://github.com/w4u-public/A.css */
 /* init */
 
-[animation-options]{
+[animation-keys]{
   opacity: 0;
   transition: .5s opacity ease;
 }
