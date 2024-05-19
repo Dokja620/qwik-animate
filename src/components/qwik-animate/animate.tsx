@@ -3,14 +3,14 @@ import animateStyles from './animate.css?inline';
 
 interface Store {
   isIntersecting: boolean;
-  hasAnimated: boolean; // Track if the animation has run at least once
+  hasAnimated: boolean;
 }
 
 export const Animate = component$(({ animationKeys, class: classProp, runOnce = false, debug = false, threshold = "0.5, 0.5" }: { animationKeys: string, class?: string, runOnce?: boolean, debug?: boolean, threshold?: string }) => {
   useStyles$(animateStyles);
 
   const store = useStore<Store>({ isIntersecting: false, hasAnimated: false });
-  const elementId = Math.random().toString(36).substr(2, 9);
+  const elementId = Math.random().toString(36).substring(2, 11);
 
   // Parse threshold prop
   const [showThreshold, hideThreshold] = threshold.split(',').map(t => parseFloat(t.trim()));
