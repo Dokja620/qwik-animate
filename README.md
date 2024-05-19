@@ -10,6 +10,7 @@ Introducing **QwikAnimate**: 🌟 An animated on-scroll library for QwikJS! With
 ## Features
 - **Run Once**: Ensure animations run only once when the element first comes into view.
 - **Debug Mode**: Enable console logs for debugging purposes.
+- **Threshold Control**: Customize when animations start and stop based on the scroll position.
 - **Animation Preset File**: Includes `animate.css` with a variety of predefined animations.
 - **Interactive Playground**: Explore animations in real-time with our interactive playground at [qwikanimate.css](https://qwikanimate.css).
 
@@ -34,7 +35,7 @@ import { Animate } from "~/components/qwik-animate/animate";
 export default function MyComponent() {
   return (
     <>
-      <Animate class="div" animationOptions="*whatever*">
+      <Animate class="div" animationKeys="@supports_anim_chains">
         <!-- Your content here -->
       </Animate>
     </>
@@ -46,7 +47,7 @@ export default function MyComponent() {
 The `runOnce` prop ensures that the animation runs only once when the element first comes into view.
 
 ```tsx
-<Animate class="div" animationOptions="@sc-in_child-ascend @bn @rt-z" runOnce>
+<Animate class="div" animationKeys="@supports_anim_chains" runOnce>
   <!-- Your content here -->
 </Animate>
 ```
@@ -55,13 +56,21 @@ The `runOnce` prop ensures that the animation runs only once when the element fi
 The `debug` prop allows you to enable console logs for debugging purposes.
 
 ```tsx
-<Animate class="div" animationOptions="@sc-in_child-ascend @bn @rt-y" debug>
+<Animate class="div" animationKeys="@supports_anim_chains" debug>
   <!-- Your content here -->
 </Animate>
 ```
-Got it, let's trim it down further:
 
----
+### Threshold Control
+The `threshold` prop allows you to customize when animations start and stop based on the scroll position. The threshold values can be adjusted to control the intersection ratio for showing and hiding the animation.
+In short:
+`threshold`="`show threshold`, `hide threshold`"
+
+```tsx
+<Animate class="div" animationKeys="fadeIn" threshold="0.3, 0.7">
+  <!-- Your content here -->
+</Animate>
+```
 
 ## animate.css: Elevate Your Animations
 
