@@ -1,5 +1,5 @@
 {
-  "name": "qwik-animate",
+  "name": "@dokja620/qwik-animate",
   "version": "1.0.0",
   "description": "An animated on-scroll library for QwikJS! With a vast array of animations, it seamlessly integrates with QwikJS, enabling effortless creation of captivating scroll-triggered effects.",
   "main": "./lib/index.qwik.mjs",
