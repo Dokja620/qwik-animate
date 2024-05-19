@@ -1,0 +1,1 @@
+export { Animate } from "./components/qwik-animate/animate";

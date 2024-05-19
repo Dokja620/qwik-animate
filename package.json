@@ -1,0 +1,38 @@
+{
+  "name": "qwik-animate",
+  "version": "1.0.0",
+  "description": "An animated on-scroll library for QwikJS! With a vast array of animations, it seamlessly integrates with QwikJS, enabling effortless creation of captivating scroll-triggered effects.",
+  "main": "index.js",
+  "keywords": [
+    "qwik",
+    "qwikjs",
+    "qwik-animate",
+    "animation",
+    "scroll-triggered",
+    "on-scroll",
+    "effects",
+    "animate.css",
+    "animation-library",
+    "scroll-animation",
+    "scroll-effects",
+    "interactive",
+    "playground",
+    "debugging",
+    "run-once",
+    "debug-mode",
+    "preset-animations"
+  ],  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dokja620/qwik-animate.git"
+  },
+  "author": "RAKOTOARIVAO Diary Axel",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Dokja620/qwik-animate/issues"
+  },
+  "homepage": "https://github.com/Dokja620/qwik-animate#readme"
+}
