@@ -99,5 +99,7 @@ Elevate your animations with animate.css and Qwik Animate. Explore now!
 ## Credits
 👏 Credit is due to @w4u-public/A.css for creating an exceptionally comprehensive CSS animation generator. His remarkable work, crafted single-handedly, deserves wider recognition for its innovation and utility.
 
+** will get disconrinuited
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
